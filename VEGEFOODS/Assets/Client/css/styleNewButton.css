@@ -1,0 +1,20 @@
+﻿.btnAddToCart {
+    background-color: black;
+    border-radius: 20px;
+}
+    .btnAddToCart:hover {
+        background: #82ae46;
+        border: 1px solid #82ae46;
+        color: #fff;
+    }   
+.btnOrder {
+    background-color: #82ae46;
+    border-radius: 20px;
+    color: #fff;
+}
+    .btnOrder:hover {
+        background-color: #fff;
+        border-radius: 20px;
+        border: 1px solid #82ae46;
+        color: black;
+    }

@@ -21,5 +21,6 @@ namespace VEGEFOODS.Models
         public virtual order order { get; set; }
 
         public virtual product product { get; set; }
+
     }
 }

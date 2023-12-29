@@ -25,7 +25,7 @@ namespace VEGEFOODS.Models
         [StringLength(100)]
         public string image { get; set; }
 
-        [StringLength(255)]
+        [StringLength(int.MaxValue)]
         public string description { get; set; }
 
         public double? price { get; set; }
@@ -36,5 +36,6 @@ namespace VEGEFOODS.Models
 
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<order_details> order_details { get; set; }
+
     }
 }

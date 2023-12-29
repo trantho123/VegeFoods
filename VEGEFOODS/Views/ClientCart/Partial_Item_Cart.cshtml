@@ -1,0 +1,55 @@
+﻿@model IEnumerable<VEGEFOODS.Models.ClientModel.ShoppingCartItem>
+
+<table class="table">
+    <thead class="thead-primary">
+        <tr class="text-center">
+            <th>&nbsp;</th>
+            <th>&nbsp;</th>
+            <th>Product name</th>
+            <th>Price</th>
+            <th>Quantity</th>
+            <th>Total</th>
+        </tr>
+    </thead>
+    <tbody>
+        @if (Model != null && Model.Any())
+                {
+                    Double total = 0;
+                    foreach (var item in Model)
+                    {
+                        total= total+item.Total;
+                <tr class="text-center" id="trow_@item.Product.id">
+                    <td class="product-remove"><a class="btnDelete" data-id="@item.Product.id" href="#"><span class="ion-ios-close"></span></a></td>
+
+                    <td class="image-prod"><div class="img" style="background-image: url(/Assets/Client/images/@item.Product.image );"></div></td>
+
+                    <td class="product-name">
+                        <h3>@item.Product.name</h3>
+                        <p>Far far away, behind the word mountains, far from the countries</p>
+                    </td>
+
+                    <td class="price">$@item.Product.price</td>
+
+                    <td class="quantity">
+                        <div class="input-group mb-3">
+                            <input id="quantity_@item.Product.id" type="number" step="1" min="1" value="@item.Quantity" name="quantity" class="quantity form-control input-number">
+
+                        </div>
+                    </td>
+
+                    <td class="total">$@item.Total</td>
+                    <td><a href="" class="btnUpdateQuantity" data-id="@item.Product.id">Update</a></td>
+                </tr>
+                }
+                <tr class="text-center">
+                    <th>&nbsp;</th>
+                    <th>&nbsp;</th>
+                    <th>&nbsp;</th>
+                    <th>&nbsp;</th>
+                    <th><h3>Total</h3></th>
+                    <th style="vertical-align: middle;">$@total</th>
+                </tr>
+        }
+
+    </tbody>
+</table>

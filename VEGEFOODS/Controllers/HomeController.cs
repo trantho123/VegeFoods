@@ -3,11 +3,13 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using VEGEFOODS.Models;
 
 namespace VEGEFOODS.Controllers
 {
     public class HomeController : Controller
     {
+        private readonly VegeFoodsDbContext dbContext;
         public ActionResult Index()
         {
             return View();
