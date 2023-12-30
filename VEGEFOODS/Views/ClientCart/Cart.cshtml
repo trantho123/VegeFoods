@@ -2,39 +2,27 @@
     ViewBag.Title = "Cart";
     Layout = "~/Views/Shared/_ClientLayout.cshtml";
 }
+@if (ViewBag.CheckLogin != null)
+{
+    <section class="ftco-section ftco-cart">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-12 ftco-animate">
+                    <div class="cart-list" id="load_cart">
+                        @Html.Action("Partial_Item_Cart", "ClientCart")
 
-<section class="ftco-section ftco-cart">
-    <div class="container">
-        <div class="row">
-            <div class="col-md-12 ftco-animate">
-                <div class="cart-list" id="load_cart">
-                    @Html.Action("Partial_Item_Cart", "ClientCart")
-
-                </div>
-                <p style="text-align:end;">
-                    <a href="#" class="btnOrder btn-black py-3 px-5">Buy</a>
-                </p>
-            </div>
-        </div>
-
-    </div>
-</section>
-
-<section class="ftco-section ftco-no-pt ftco-no-pb py-5 bg-light">
-    <div class="container py-4">
-        <div class="row d-flex justify-content-center py-5">
-            <div class="col-md-6">
-                <h2 style="font-size: 22px;" class="mb-0">Subcribe to our Newsletter</h2>
-                <span>Get e-mail updates about our latest shops and special offers</span>
-            </div>
-            <div class="col-md-6 d-flex align-items-center">
-                <form action="#" class="subscribe-form">
-                    <div class="form-group d-flex">
-                        <input type="text" class="form-control" placeholder="Enter email address">
-                        <input type="submit" value="Subscribe" class="submit px-3">
                     </div>
-                </form>
+                    <p style="text-align:end;">
+                        <a href="@Url.Action("CheckOut", "ClientCart")" class="btnOrder btn-black py-3 px-5">Buy</a>
+                    </p>
+                </div>
             </div>
+
         </div>
-    </div>
-</section>
+    </section>
+}
+else
+            {
+                <div style="text-align:center; margin:50px"><h2>Please login to use cart</h2></div>
+            }
+

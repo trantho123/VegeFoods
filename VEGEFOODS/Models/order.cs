@@ -22,6 +22,9 @@ namespace VEGEFOODS.Models
 
         [Column(TypeName = "date")]
         public DateTime? created_date { get; set; }
+        public string receiver { get; set; }
+        public string receiverPhone { get; set; }
+        public string address { get; set; }
 
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<order_details> order_details { get; set; }

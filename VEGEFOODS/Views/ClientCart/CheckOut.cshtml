@@ -1,0 +1,80 @@
+﻿@model VEGEFOODS.Models.ClientModel.OrderViewModel       
+
+<section class="ftco-section">
+    <div class="container">
+        <div class="row justify-content-center">
+
+            @if (ViewBag.CheckCart != null && ViewBag.CheckItemCart !=0 )
+            {
+                <div class="col-xl-7 ftco-animate">
+                    @using (Html.BeginForm())
+                    {
+                    @Html.AntiForgeryToken()
+                    <h3 class="mb-4 billing-heading">Order</h3>
+                    <div class="row align-items-end">
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label for="firstname">Name</label>
+@*                                <input type="text" class="form-control" placeholder="Your name here" style="width: 635px;">*@
+                                @Html.EditorFor(model => model.Name, new { htmlAttributes = new { @class = "form-control form-control-lg", placeholder = "Enter your name here" , style = "width: 635px;" } })
+                                @Html.ValidationMessageFor(model => model.Name, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+                        <div class="w-100"></div>
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label for="streetaddress">Address</label> 
+                                @Html.EditorFor(model => model.Address, new { htmlAttributes = new { @class = "form-control form-control-lg", placeholder = "House number and street name", style = "width: 635px;" } })
+                                @Html.ValidationMessageFor(model => model.Address, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <!-- <input type="text" class="form-control" placeholder="Appartment, suite, unit etc: (optional)"> -->
+                            </div>
+                        </div>
+                        <div class="w-100"></div>
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label for="towncity">Phone</label>
+                                @Html.EditorFor(model => model.Phone, new { htmlAttributes = new { @class = "form-control form-control-lg", placeholder = "Enter your phone here", style = "width: 635px;" } })
+                                @Html.ValidationMessageFor(model => model.Phone, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="form-group">
+                            </div>
+                        </div>
+                        <div class="w-100"></div>
+                        <div class="w-100"></div>
+                        <div class="col-md-12">
+                        </div>
+                        <div class="col-md-12">
+                            <div class="cart-detail p-3 p-md-4">
+                                <button type="submit" class="btn btn-primary py-3 px-4">
+                                    Place an order
+                                </button>
+                              
+                            </div>
+                        </div>
+                    </div>
+                    }
+
+
+                </div>       
+                <div class="col-xl-5">
+                    @Html.Action("Partial_Item_Order", "ClientCart")
+                </div> <!-- .col-md-8 -->
+            }
+            else
+            {
+            <div style="text-align:center; margin:50px"><h2>Cart is empty.</h2></div>
+            }
+            
+            <!-- END -->
+
+
+
+        </div>
+    </div>
+</section>

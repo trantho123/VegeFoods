@@ -145,6 +145,7 @@
     </Compile>
     <Compile Include="Models\category.cs" />
     <Compile Include="Models\ClientModel\LoginViewModel.cs" />
+    <Compile Include="Models\ClientModel\OrderViewModel.cs" />
     <Compile Include="Models\ClientModel\ShoppingCartItem.cs" />
     <Compile Include="Models\ClientModel\ShopViewModel.cs" />
     <Compile Include="Models\ClientModel\SignUpViewModel.cs" />
@@ -417,6 +418,9 @@
     <Content Include="Views\ClientProductSingle\Product.cshtml" />
     <Content Include="Views\ClientShop\Shop.cshtml" />
     <Content Include="Views\Shared\_ClientLayout.cshtml" />
+    <Content Include="Views\ClientCart\Partial_Item_Order.cshtml" />
+    <Content Include="Views\ClientCart\CheckOut.cshtml" />
+    <Content Include="Views\ClientCart\SuccessCheckOut.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

@@ -31,8 +31,9 @@ namespace VEGEFOODS.Controllers
                 var user = dbContext.users.FirstOrDefault(u => u.email.Equals(loginModel.email) &&  u.password.Equals(loginModel.password));
                 if(user != null)
                 {
+                    Session["User"] = user;
                     Session["IdUser"] = user.id.ToString();
-                    Session["EmailUser"] = user.email.ToString();
+                    Session["UserName"] = user.name.ToString();
                     return RedirectToAction("Index", "ClientHome");
                 }
                 else

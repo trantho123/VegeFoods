@@ -17,7 +17,25 @@ namespace VEGEFOODS.Controllers
             dbContext = new VegeFoodsDbContext();
         }
         // GET: ClientCart
+        [HttpGet]
         public ActionResult Cart()
+        {
+            var userid = Session["IdUser"];
+            if (userid != null)
+            {
+                ViewBag.CheckLogin = userid;
+                ShoppingCart cart = (ShoppingCart)Session["Cart"];
+                if (cart != null)
+                {
+                    return View(cart.Items);
+                }
+                //   return RedirectToAction("Login", "ClientLogin");
+                return View();
+            }
+            return View(); 
+        }
+        [HttpGet]
+        public ActionResult CheckOut()
         {
             /*var userid = Session["IdUser"];
             if(userid == null)
@@ -28,12 +46,73 @@ namespace VEGEFOODS.Controllers
             ShoppingCart cart = (ShoppingCart)Session["Cart"];
             if (cart != null)
             {
-                return View(cart.Items);
+                ViewBag.CheckCart = cart;
+                ViewBag.CheckItemCart = cart.Items.Count();
             }
             return View();
-           
+
         }
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult CheckOut(OrderViewModel order)
+        {
+            ShoppingCart cart = (ShoppingCart)Session["Cart"];
+            if (cart != null)
+            {
+                ViewBag.CheckCart = cart;
+                ViewBag.CheckItemCart = cart.Items.Count();
+            }
+            if (ModelState.IsValid)
+            {
+                user user = (user)Session["User"];
+                order checkOut = new order
+                {
+                    user_id = user.id,
+                    total_prices = cart.GetTotal(),
+                    created_date = DateTime.Now,
+                    receiver = order.Name,
+                    receiverPhone = order.Phone,
+                    address = order.Address,
+                    order_details = new List<order_details>()
+                };
+                foreach (var item in cart.Items)
+                {
+                    var orderDetail = new order_details
+                    {
+                        product_id = item.Product.id,
+                        quantity = item.Quantity,
+                        price = item.Total,
+                    };
+
+                    checkOut.order_details.Add(orderDetail);
+                }
+                dbContext.orders.Add(checkOut);
+                dbContext.SaveChanges();
+                Session.Remove("Cart");
+                return View("SuccessCheckOut");
+            }
+           
+            return View(order);
+
+        }
+        [HttpGet]
         public ActionResult Partial_Item_Cart()
+        {
+            /*var userid = Session["IdUser"];
+            if (userid == null)
+            {
+                return RedirectToAction("Login", "ClientLogin");
+            }*/
+            ShoppingCart cart = (ShoppingCart)Session["Cart"];
+            if (cart != null)
+            {
+                return PartialView(cart.Items);
+            }
+            return PartialView();
+
+        }
+
+        public ActionResult Partial_Item_Order()
         {
             /*var userid = Session["IdUser"];
             if (userid == null)
@@ -64,7 +143,7 @@ namespace VEGEFOODS.Controllers
                 code = -1,
                 Count = 0
             };
-          /*  if (userid == null)
+            if (userid == null)
             {
                 code = new
                 {
@@ -74,7 +153,7 @@ namespace VEGEFOODS.Controllers
                     Count = 0
                 };
                 return Json(code);
-            }*/
+            }
             var checkProduct = dbContext.products.FirstOrDefault(x => x.id == id);
             if(checkProduct != null)
             {

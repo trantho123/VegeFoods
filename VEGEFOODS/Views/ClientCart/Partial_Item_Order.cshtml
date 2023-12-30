@@ -1,0 +1,26 @@
+﻿@model IEnumerable<VEGEFOODS.Models.ClientModel.ShoppingCartItem>
+
+
+    <div class="row mt-5 pt-3">
+        <div class="col-md-12 d-flex mb-5">
+            <div class="cart-detail cart-total p-3 p-md-4">
+                <h3 class="billing-heading mb-4">Cart Total</h3>
+                @if (Model != null && Model.Any())
+                {
+                    Double total = 0;
+                    foreach (var item in Model)
+                    {
+                        total = total + item.Total;
+                        <p class="d-flex">
+                            <span>@item.Product.name</span>
+                            <span>$@item.Total</span>
+                        </p>
+                    }
+                    <p class="d-flex total-price">
+                        <span>Total</span>
+                        <span>$@total</span>
+                    </p>
+                }
+            </div>
+        </div>
+    </div>

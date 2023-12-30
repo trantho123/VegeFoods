@@ -18,7 +18,7 @@ $(document).ready(function () {
             success: function (rs) {
                 if (rs.Success) {
                     $('#checkout-item').html(rs.Count);
-                    alert(rs.msg);
+                  //  alert(rs.msg);
 
                 }
                 else {
