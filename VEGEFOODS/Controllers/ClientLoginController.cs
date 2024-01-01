@@ -2,6 +2,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Security.Policy;
 using System.Web;
 using System.Web.Mvc;
 using VEGEFOODS.Models;
@@ -31,9 +32,14 @@ namespace VEGEFOODS.Controllers
                 var user = dbContext.users.FirstOrDefault(u => u.email.Equals(loginModel.email) &&  u.password.Equals(loginModel.password));
                 if(user != null)
                 {
+
                     Session["User"] = user;
                     Session["IdUser"] = user.id.ToString();
                     Session["UserName"] = user.name.ToString();
+                    if(user.role_id == 1)
+                    {
+                        return Redirect("Admin/Home");
+                    }
                     return RedirectToAction("Index", "ClientHome");
                 }
                 else
@@ -74,7 +80,7 @@ namespace VEGEFOODS.Controllers
                         newUser.name = model.userName;
                         newUser.email = model.email;
                         newUser.password = model.password;
-                        newUser.role_id = 1;
+                        newUser.role_id = 2;
                         dbContext.users.Add(newUser);
                         dbContext.SaveChanges();
                         return RedirectToAction("Login", "ClientLogin");
